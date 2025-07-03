@@ -27,17 +27,21 @@ public class MyGetterSetterProcessor extends AbstractProcessor {
                 TypeElement classElement = (TypeElement) elem;
                 String className = classElement.getSimpleName().toString();
                 String packageName = processingEnv.getElementUtils().getPackageOf(classElement).getQualifiedName().toString();
+
+                processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "Processing: " + className);
+
                 try {
-                    JavaFileObject jfo = filer.createSourceFile(packageName + "." + className);
+                    JavaFileObject jfo = filer.createSourceFile(packageName + "a." + className + "");
+                    processingEnv.getMessager().printMessage(Diagnostic.Kind.MANDATORY_WARNING, "Error:test " + jfo);
                     try (Writer writer = jfo.openWriter()) {
-                        writer.write("package " + packageName + ";\n\n");
-                        writer.write("public class " + className +" {\n");
+                        writer.write("package " + packageName + "a;\n");
+                        writer.write("public class " + className + " {\n");
 
                         for (VariableElement field : ElementFilter.fieldsIn(classElement.getEnclosedElements())) {
                             String fieldName = field.getSimpleName().toString();
                             String fieldType = field.asType().toString();
                             String methodSuffix = Character.toUpperCase(fieldName.charAt(0)) + fieldName.substring(1);
-
+                            writer.write("public " + fieldType + " " + fieldName +" ;\n");
                             writer.write("    public " + fieldType + " get" + methodSuffix + "() {\n");
                             writer.write("        return this." + fieldName + ";\n");
                             writer.write("    }\n");
