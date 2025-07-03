@@ -28,7 +28,7 @@ public class MyGetterSetterProcessor extends AbstractProcessor {
                 String className = classElement.getSimpleName().toString();
                 String packageName = processingEnv.getElementUtils().getPackageOf(classElement).getQualifiedName().toString();
 
-                processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "Processing: " + className);
+                processingEnv.getMessager().printMessage(Diagnostic.Kind.MANDATORY_WARNING, "Processing:......... ");
 
                 try {
                     JavaFileObject jfo = filer.createSourceFile(packageName + "a." + className + "");
