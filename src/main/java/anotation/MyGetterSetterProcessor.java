@@ -10,7 +10,6 @@ import java.io.Writer;
 import java.util.Set;
 
 @SupportedAnnotationTypes("anotation.MyGetterSetter")
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class MyGetterSetterProcessor extends AbstractProcessor {
     private Filer filer;
 
