@@ -45,10 +45,10 @@ public class MyMapperProcessor extends AbstractProcessor {
 				processingEnv.getMessager().printMessage(Kind.NOTE, "Starting .....");
 				
 				try {
-					JavaFileObject jFileObject = filer.createSourceFile(packageName + "." + interfaceName +"impl");
+					JavaFileObject jFileObject = filer.createSourceFile(packageName + "." + interfaceName +"Impl");
 					try(Writer writer = jFileObject.openWriter()){
-					writer.write("package " + packageName +" \n\n");
-					writer.write("public Class " + interfaceName +"Impl{ \n\n");
+					writer.write("package " + packageName +"; \n\n");
+					writer.write("public class " + interfaceName +"Impl implements "+interfaceName +" { \n\n");
 					
 					List<ExecutableElement> lstField =  ElementFilter.methodsIn(typeElement.getEnclosedElements());
 					lstField.stream().forEach(item -> {
@@ -79,12 +79,13 @@ public class MyMapperProcessor extends AbstractProcessor {
 						
 							writer.write("        return target;\n");
 							writer.write("} \n\n");
-							writer.write("} \n\n");
+							
 						} catch (IOException e) {
 							
 						}
 						
 					});
+					writer.write("} \n\n");
 					}
 				} catch (Exception e) {
 			
