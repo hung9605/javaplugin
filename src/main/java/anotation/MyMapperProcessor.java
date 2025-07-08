@@ -2,7 +2,6 @@ package anotation;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -11,8 +10,6 @@ import javax.annotation.processing.Filer;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
-import javax.annotation.processing.SupportedSourceVersion;
-import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
@@ -23,7 +20,6 @@ import javax.tools.Diagnostic.Kind;
 import javax.tools.JavaFileObject;
 
 @SupportedAnnotationTypes("anotation.MyMapper")
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class MyMapperProcessor extends AbstractProcessor {
 	
 	private Filer filer;
@@ -120,20 +116,19 @@ public class MyMapperProcessor extends AbstractProcessor {
 							writer.write("} \n\n");
 							 }
 						} catch (IOException e) {
-							
+							e.printStackTrace();
 						}
 						
 					});
 					writer.write("} \n\n");
 					}
 				} catch (Exception e) {
-			
+					e.printStackTrace();
 				}
 				
 			}
 		}
 		processingEnv.getMessager().printMessage(Kind.NOTE, "Mapper .....");
-		return false;
+		return true;
 	}
-
 }
